@@ -1,4 +1,8 @@
 from app import app
+import urllib.request,json
+from .models import movie
+
+Movie = movie.Movie
 
 #Getting api key
 api_key = app.config['MOVIE_API_KEY']
@@ -47,4 +51,4 @@ def process_results(movie_list):
       movie_results.append(movie_object)
 
   return movie_results
-  
+
