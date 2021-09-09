@@ -1,8 +1,10 @@
 from flask import render_template,request,redirect,url_for
 from app import app
 from .request import get_movies,get_movie,search_movie
-from .models import review
 from .forms import ReviewForm
+from .models import review
+
+
 Review = review.Review
 
 # Views
@@ -32,7 +34,7 @@ def movie(id):
   '''
   movie = get_movie(id)
   title = f'{movie.title}'
-  return render_template('movie.html',title = title,movie = movie)
+  return render_template('movie.html',title = title,movie = movie,review = review)
 
 @app.route('/search/<movie_name>')
 def search(movie_name):
@@ -53,11 +55,13 @@ def new_review(id):
   if form.validate_on_submit():
     title = form.title.data
     review = form.review.data
+
     new_review = Review(movie.id,title,movie.poster,review)
     new_review.save_review()
+
     return redirect(url_for('movie',id = movie.id))
 
   title = f'{movie.title} review'
-  return render_template('new_review.html',title = title, review_form = form,movie=movie)
+  return render_template('new_review.html',title = title, review_form = form, movie=movie)
   
 
