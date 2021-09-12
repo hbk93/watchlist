@@ -1,0 +1,4 @@
+export MOVIE_API_KEY=d8e714062bf27229a379a09af8e8a5dd
+export SECRET_KEY=Moringa@2021
+
+python3 manage.py server
